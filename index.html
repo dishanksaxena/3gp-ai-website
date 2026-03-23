@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3GP.AI — Intelligent Solutions for the Modern Enterprise</title>
+    <meta name="description" content="3GP.AI builds agentic AI products that transform how enterprises operate. From observability to hiring to automation — we ship AI that works.">
+    <meta name="keywords" content="AI, enterprise AI, observability, ATS, job automation, agentic AI, AI transformation">
+    <meta name="author" content="3GP.AI">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="3GP.AI — AI That Actually Works For Your Business">
+    <meta property="og:description" content="We build agentic AI products that deploy, scale, and deliver measurable ROI from day one.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://3gp.ai">
+    <meta property="og:image" content="https://3gp.ai/images/og-image.png">
+    <meta property="og:site_name" content="3GP.AI">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="3GP.AI — AI That Actually Works For Your Business">
+    <meta name="twitter:description" content="Agentic AI products for enterprise. Observability, hiring, automation, transformation.">
+    <meta name="twitter:image" content="https://3gp.ai/images/og-image.png">
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://3gp.ai">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+    <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "3GP.AI",
+        "url": "https://3gp.ai",
+        "logo": "https://3gp.ai/images/logo.png",
+        "description": "3GP.AI builds agentic AI products that transform how enterprises operate.",
+        "sameAs": [],
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "email": "hello@3gp.ai",
+            "contactType": "sales"
+        },
+        "offers": [
+            { "@type": "Offer", "name": "GREYHOUND - Agentic Observability", "description": "AI-powered observability with Glass View technology" },
+            { "@type": "Offer", "name": "TETRIS - AI Applicant Tracking", "description": "AI-native ATS with smart ranking and bias detection" },
+            { "@type": "Offer", "name": "ApplyMaster - Auto Job Application", "description": "AI job-hunting co-pilot with auto-apply" },
+            { "@type": "Offer", "name": "AI Transformation Consultancy", "description": "End-to-end advisory for enterprises adopting AI" }
+        ]
+    }
+    </script>
+</head>
+<body>
+    <!-- Background Effects -->
+    <div class="bg-grid"></div>
+    <div class="bg-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+    <div class="cursor-dot" id="cursorDot"></div>
+
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+        <div class="navbar-inner">
+            <a href="/" class="logo">
+                <div class="logo-mark">3GP</div>
+                <div class="logo-text"><span>3GP.AI</span></div>
+            </a>
+            <div class="nav-links" id="navLinks">
+                <a href="#products">Products</a>
+                <a href="#capabilities">Capabilities</a>
+                <a href="#transformation">Services</a>
+                <a href="#proof">Results</a>
+                <a href="#contact" class="nav-cta">Get Started</a>
+            </div>
+            <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <span class="hero-badge-dot"></span>
+                    Now building the future of enterprise AI
+                </div>
+                <h1>
+                    AI That <span class="gradient-text">Actually Works</span><br>
+                    For Your Business
+                </h1>
+                <p>
+                    We build agentic AI products that don't just demo well — they deploy, scale, and deliver measurable ROI from day one.
+                </p>
+                <div class="hero-actions">
+                    <a href="#products" class="btn btn-primary">
+                        Explore Products
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </a>
+                    <a href="#contact" class="btn btn-secondary">
+                        Book a Demo
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+                    </a>
+                </div>
+                <div class="hero-stats">
+                    <div class="hero-stat">
+                        <div class="hero-stat-value">4</div>
+                        <div class="hero-stat-label">AI Products</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-value">99.9%</div>
+                        <div class="hero-stat-label">Uptime SLA</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-value">&lt;200ms</div>
+                        <div class="hero-stat-label">Avg Response</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-value">SOC 2</div>
+                        <div class="hero-stat-label">Compliant</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Marquee -->
+    <section class="marquee-section">
+        <div class="marquee-track">
+            <span class="marquee-item">Agentic AI <span class="sep"></span></span>
+            <span class="marquee-item">Observability <span class="sep"></span></span>
+            <span class="marquee-item">Talent Intelligence <span class="sep"></span></span>
+            <span class="marquee-item">Workflow Automation <span class="sep"></span></span>
+            <span class="marquee-item">Enterprise Ready <span class="sep"></span></span>
+            <span class="marquee-item">Real-Time Analytics <span class="sep"></span></span>
+            <span class="marquee-item">AI Transformation <span class="sep"></span></span>
+            <span class="marquee-item">Job Automation <span class="sep"></span></span>
+            <span class="marquee-item">Agentic AI <span class="sep"></span></span>
+            <span class="marquee-item">Observability <span class="sep"></span></span>
+            <span class="marquee-item">Talent Intelligence <span class="sep"></span></span>
+            <span class="marquee-item">Workflow Automation <span class="sep"></span></span>
+            <span class="marquee-item">Enterprise Ready <span class="sep"></span></span>
+            <span class="marquee-item">Real-Time Analytics <span class="sep"></span></span>
+            <span class="marquee-item">AI Transformation <span class="sep"></span></span>
+            <span class="marquee-item">Job Automation <span class="sep"></span></span>
+        </div>
+    </section>
+
+    <!-- Products -->
+    <section class="products" id="products">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-label">Our Products</div>
+                <h2 class="section-title">Purpose-Built AI Products</h2>
+                <p class="section-desc">Each product is a complete solution — not a wrapper on an LLM. Real AI agents that see, think, and act.</p>
+            </div>
+
+            <div class="product-grid">
+                <!-- GREYHOUND -->
+                <div class="product-card reveal" data-theme="purple">
+                    <div class="product-info">
+                        <div class="product-icon">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                        </div>
+                        <div class="product-tag">Flagship Product</div>
+                        <h3>GREYHOUND</h3>
+                        <p class="product-desc">Agentic observability that doesn't just monitor — it understands. Toggle the Glass View to see transparent, real-time visualization of every process, pipeline, and data flow behind your systems.</p>
+                        <div class="product-features">
+                            <span class="product-feature">Glass View Mode</span>
+                            <span class="product-feature">Agentic Debugging</span>
+                            <span class="product-feature">Simulation Engine</span>
+                            <span class="product-feature">Root Cause AI</span>
+                            <span class="product-feature">Live Topology</span>
+                        </div>
+                        <a href="/greyhound" class="product-link">
+                            Explore GREYHOUND
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                        </a>
+                    </div>
+                    <div class="product-visual">
+                        <div class="product-mockup">
+                            <div class="mockup-topbar">
+                                <span class="mockup-dot"></span><span class="mockup-dot"></span><span class="mockup-dot"></span>
+                                <span class="mockup-url">greyhound.3gp.ai/dashboard</span>
+                            </div>
+                            <div class="mockup-content greyhound-mock">
+                                <div class="mock-row">
+                                    <div class="mock-node" style="background:rgba(108,92,231,0.2);color:var(--accent-1);">API</div>
+                                    <div class="mock-line" style="background:var(--accent-1);"></div>
+                                    <div class="mock-node" style="background:rgba(0,206,201,0.2);color:var(--accent-2);">SVC</div>
+                                    <div class="mock-line" style="background:var(--accent-2);"></div>
+                                    <div class="mock-node" style="background:rgba(253,121,168,0.2);color:var(--accent-3);">DB</div>
+                                </div>
+                                <div class="mock-row" style="margin-top:16px;">
+                                    <div class="mock-bar" style="background:var(--accent-1);width:70%;"></div>
+                                    <div class="mock-bar" style="background:var(--accent-2);width:30%;"></div>
+                                </div>
+                                <div class="mock-row">
+                                    <div class="mock-bar" style="background:var(--accent-2);width:50%;"></div>
+                                    <div class="mock-bar" style="background:var(--accent-4);width:45%;"></div>
+                                    <div class="mock-bar" style="background:var(--accent-3);width:5%;"></div>
+                                </div>
+                                <div class="mock-row">
+                                    <div class="mock-bar" style="background:var(--accent-1);width:85%;"></div>
+                                    <div class="mock-bar" style="background:var(--accent-3);width:15%;"></div>
+                                </div>
+                                <div class="mock-metric"><span>Latency P99</span><span class="up">12ms ↓</span></div>
+                                <div class="mock-metric"><span>Throughput</span><span class="up">14.2k rps ↑</span></div>
+                                <div class="mock-metric"><span>Error Rate</span><span class="up">0.02% ↓</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TETRIS -->
+                <div class="product-card reveal" data-theme="teal">
+                    <div class="product-info">
+                        <div class="product-icon">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+                        </div>
+                        <div class="product-tag">HR Tech</div>
+                        <h3>TETRIS</h3>
+                        <p class="product-desc">AI-native applicant tracking that fits candidates to roles like puzzle pieces. Smart ranking, automated screening, and bias-free hiring powered by advanced language models.</p>
+                        <div class="product-features">
+                            <span class="product-feature">AI Candidate Ranking</span>
+                            <span class="product-feature">Smart Screening</span>
+                            <span class="product-feature">Pipeline Analytics</span>
+                            <span class="product-feature">Bias Detection</span>
+                        </div>
+                        <a href="/tetris" class="product-link">
+                            Explore TETRIS
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                        </a>
+                    </div>
+                    <div class="product-visual">
+                        <div class="product-mockup">
+                            <div class="mockup-topbar">
+                                <span class="mockup-dot"></span><span class="mockup-dot"></span><span class="mockup-dot"></span>
+                                <span class="mockup-url">tetris.3gp.ai/pipeline</span>
+                            </div>
+                            <div class="mockup-content tetris-mock">
+                                <div class="mock-pipeline">
+                                    <div class="mock-stage">
+                                        <div class="mock-stage-title">Applied (24)</div>
+                                        <div class="mock-candidate" style="border-left:3px solid var(--accent-2);">S. Patel — 94%</div>
+                                        <div class="mock-candidate" style="border-left:3px solid var(--accent-2);">M. Chen — 91%</div>
+                                        <div class="mock-candidate" style="border-left:3px solid var(--accent-4);">J. Kim — 78%</div>
+                                    </div>
+                                    <div class="mock-stage">
+                                        <div class="mock-stage-title">Screen (8)</div>
+                                        <div class="mock-candidate" style="border-left:3px solid var(--accent-2);">A. M&#252;ller — 96%</div>
+                                        <div class="mock-candidate" style="border-left:3px solid var(--accent-2);">R. Obi — 89%</div>
+                                    </div>
+                                    <div class="mock-stage">
+                                        <div class="mock-stage-title">Interview (3)</div>
+                                        <div class="mock-candidate" style="border-left:3px solid var(--accent-1);">L. Torres — 97%</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ApplyMaster -->
+                <div class="product-card reveal" data-theme="pink">
+                    <div class="product-info">
+                        <div class="product-icon">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+                        </div>
+                        <div class="product-tag">Career Automation</div>
+                        <h3>APPLYMASTER</h3>
+                        <p class="product-desc">Your AI job-hunting co-pilot. Auto-tailors resumes, writes cover letters, submits applications, and tracks every opportunity — while you focus on preparing for interviews.</p>
+                        <div class="product-features">
+                            <span class="product-feature">Auto Apply</span>
+                            <span class="product-feature">Resume Tailoring</span>
+                            <span class="product-feature">Cover Letter AI</span>
+                            <span class="product-feature">Application Tracker</span>
+                            <span class="product-feature">Interview Prep</span>
+                        </div>
+                        <a href="/applymaster" class="product-link">
+                            Explore ApplyMaster
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                        </a>
+                    </div>
+                    <div class="product-visual">
+                        <div class="product-mockup">
+                            <div class="mockup-topbar">
+                                <span class="mockup-dot"></span><span class="mockup-dot"></span><span class="mockup-dot"></span>
+                                <span class="mockup-url">applymaster.ai/dashboard</span>
+                            </div>
+                            <div class="mockup-content apply-mock">
+                                <div class="mock-jobs">
+                                    <div class="mock-job">
+                                        <div class="mock-job-icon" style="background:var(--gradient-1);"></div>
+                                        <div class="mock-job-info"><div class="mock-job-title">Senior ML Engineer</div><div class="mock-job-co">Google DeepMind &bull; Mountain View</div></div>
+                                        <span class="mock-job-status" style="background:rgba(0,206,201,0.15);color:var(--accent-2);">Applied</span>
+                                    </div>
+                                    <div class="mock-job">
+                                        <div class="mock-job-icon" style="background:var(--gradient-3);"></div>
+                                        <div class="mock-job-info"><div class="mock-job-title">AI Product Lead</div><div class="mock-job-co">Stripe &bull; San Francisco</div></div>
+                                        <span class="mock-job-status" style="background:rgba(253,203,110,0.15);color:var(--accent-4);">Interview</span>
+                                    </div>
+                                    <div class="mock-job">
+                                        <div class="mock-job-icon" style="background:var(--gradient-2);"></div>
+                                        <div class="mock-job-info"><div class="mock-job-title">Staff Engineer, Platform</div><div class="mock-job-co">Datadog &bull; New York</div></div>
+                                        <span class="mock-job-status" style="background:rgba(108,92,231,0.15);color:var(--accent-1);">Screening</span>
+                                    </div>
+                                    <div class="mock-job">
+                                        <div class="mock-job-icon" style="background:var(--gradient-4);"></div>
+                                        <div class="mock-job-info"><div class="mock-job-title">Head of AI</div><div class="mock-job-co">Notion &bull; Remote</div></div>
+                                        <span class="mock-job-status" style="background:rgba(0,206,201,0.15);color:var(--accent-2);">Applied</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Consultancy -->
+                <div class="product-card reveal" data-theme="gold">
+                    <div class="product-info">
+                        <div class="product-icon">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                        </div>
+                        <div class="product-tag">Enterprise Services</div>
+                        <h3>AI Transformation Consultancy</h3>
+                        <p class="product-desc">End-to-end advisory for enterprises adopting AI. From strategy and architecture to deployment and change management — we've guided organizations from legacy to AI-first.</p>
+                        <div class="product-features">
+                            <span class="product-feature">AI Readiness Audit</span>
+                            <span class="product-feature">Architecture Design</span>
+                            <span class="product-feature">Model Selection</span>
+                            <span class="product-feature">Change Management</span>
+                            <span class="product-feature">ROI Modeling</span>
+                        </div>
+                        <a href="/consultancy" class="product-link">
+                            Learn More
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                        </a>
+                    </div>
+                    <div class="product-visual">
+                        <div class="product-mockup">
+                            <div class="mockup-topbar">
+                                <span class="mockup-dot"></span><span class="mockup-dot"></span><span class="mockup-dot"></span>
+                                <span class="mockup-url">3gp.ai/transformation</span>
+                            </div>
+                            <div class="mockup-content" style="display:flex;flex-direction:column;gap:10px;">
+                                <div style="display:flex;align-items:center;gap:12px;padding:12px;border-radius:8px;background:var(--bg-glass);border:1px solid var(--border);">
+                                    <div style="width:10px;height:10px;border-radius:50%;background:var(--accent-2);"></div>
+                                    <div style="flex:1;"><div style="font-size:0.75rem;font-weight:600;">Phase 1: Discovery</div><div style="font-size:0.65rem;color:var(--text-muted);margin-top:2px;">AI readiness assessment complete</div></div>
+                                    <div style="font-size:0.65rem;color:var(--accent-2);font-weight:600;">Done</div>
+                                </div>
+                                <div style="display:flex;align-items:center;gap:12px;padding:12px;border-radius:8px;background:var(--bg-glass);border:1px solid var(--border);">
+                                    <div style="width:10px;height:10px;border-radius:50%;background:var(--accent-4);"></div>
+                                    <div style="flex:1;"><div style="font-size:0.75rem;font-weight:600;">Phase 2: Architecture</div><div style="font-size:0.65rem;color:var(--text-muted);margin-top:2px;">Designing AI integration blueprint</div></div>
+                                    <div style="font-size:0.65rem;color:var(--accent-4);font-weight:600;">In Progress</div>
+                                </div>
+                                <div style="display:flex;align-items:center;gap:12px;padding:12px;border-radius:8px;background:var(--bg-glass);border:1px solid var(--border);">
+                                    <div style="width:10px;height:10px;border-radius:50%;background:var(--text-muted);"></div>
+                                    <div style="flex:1;"><div style="font-size:0.75rem;font-weight:600;">Phase 3: Deployment</div><div style="font-size:0.65rem;color:var(--text-muted);margin-top:2px;">Production rollout &amp; monitoring</div></div>
+                                    <div style="font-size:0.65rem;color:var(--text-muted);font-weight:600;">Upcoming</div>
+                                </div>
+                                <div style="display:flex;align-items:center;gap:12px;padding:12px;border-radius:8px;background:var(--bg-glass);border:1px solid var(--border);">
+                                    <div style="width:10px;height:10px;border-radius:50%;background:var(--text-muted);"></div>
+                                    <div style="flex:1;"><div style="font-size:0.75rem;font-weight:600;">Phase 4: Optimization</div><div style="font-size:0.65rem;color:var(--text-muted);margin-top:2px;">Continuous improvement &amp; scaling</div></div>
+                                    <div style="font-size:0.65rem;color:var(--text-muted);font-weight:600;">Upcoming</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Capabilities -->
+    <section class="capabilities" id="capabilities">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-label">Why 3GP.AI</div>
+                <h2 class="section-title">Built Different</h2>
+                <p class="section-desc">We don't build chatbots. We build autonomous systems that operate at enterprise scale.</p>
+            </div>
+            <div class="cap-grid">
+                <div class="cap-card reveal"><div class="cap-icon">&#x1f9e0;</div><h4>Agentic Architecture</h4><p>Our AI agents plan, reason, and execute multi-step workflows autonomously — not just respond to prompts.</p></div>
+                <div class="cap-card reveal"><div class="cap-icon">&#x1f50d;</div><h4>Glass View Technology</h4><p>Proprietary visualization that makes the invisible visible — see exactly what your systems are doing in real time.</p></div>
+                <div class="cap-card reveal"><div class="cap-icon">&#x26a1;</div><h4>Sub-200ms Latency</h4><p>Every product is engineered for speed. Real-time decisions, real-time insights, zero lag.</p></div>
+                <div class="cap-card reveal"><div class="cap-icon">&#x1f512;</div><h4>Enterprise Security</h4><p>SOC 2 compliant, end-to-end encryption, role-based access, and full audit trails on every action.</p></div>
+                <div class="cap-card reveal"><div class="cap-icon">&#x1f504;</div><h4>Seamless Integration</h4><p>Plug into your existing stack. REST APIs, webhooks, SSO, and pre-built connectors for 200+ tools.</p></div>
+                <div class="cap-card reveal"><div class="cap-icon">&#x1f4c8;</div><h4>Measurable ROI</h4><p>Every deployment comes with built-in analytics to quantify impact — no vanity metrics, just business outcomes.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Transformation -->
+    <section class="transformation" id="transformation">
+        <div class="container">
+            <div class="transform-grid reveal">
+                <div class="transform-visual">
+                    <div class="transform-card-stack">
+                        <div class="transform-float-card tfc-1" style="transform:rotate(-2deg);">
+                            <div class="tfc-header"><div class="tfc-dot" style="background:var(--accent-2);"></div><div class="tfc-title">Efficiency Gains</div></div>
+                            <div class="tfc-metric" style="background:var(--gradient-2);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">73%</div>
+                            <div class="tfc-metric-label">Reduction in manual processes</div>
+                        </div>
+                        <div class="transform-float-card tfc-2" style="transform:rotate(1deg);">
+                            <div class="tfc-header"><div class="tfc-dot" style="background:var(--accent-1);"></div><div class="tfc-title">Decision Speed</div></div>
+                            <div class="tfc-metric" style="background:var(--gradient-1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">5x</div>
+                            <div class="tfc-metric-label">Faster time-to-insight</div>
+                        </div>
+                        <div class="transform-float-card tfc-3" style="transform:rotate(-1deg);">
+                            <div class="tfc-header"><div class="tfc-dot" style="background:var(--accent-3);"></div><div class="tfc-title">Cost Impact</div></div>
+                            <div class="tfc-body">Average client saves <strong style="color:var(--accent-2);">$2.4M</strong> annually after full AI transformation deployment.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="transform-content">
+                    <div class="section-label" style="justify-content:flex-start;">Services</div>
+                    <h3>AI Transformation<br>That Delivers</h3>
+                    <p>We don't just advise — we architect, build, deploy, and optimize. Our consultancy has guided enterprises from legacy systems to AI-first operations.</p>
+                    <div class="transform-steps">
+                        <div class="transform-step"><div class="step-num">1</div><div class="step-text"><h5>AI Readiness Audit</h5><p>Deep assessment of your data, infrastructure, and team capabilities</p></div></div>
+                        <div class="transform-step"><div class="step-num">2</div><div class="step-text"><h5>Strategy &amp; Architecture</h5><p>Custom AI roadmap with prioritized use cases and ROI projections</p></div></div>
+                        <div class="transform-step"><div class="step-num">3</div><div class="step-text"><h5>Build &amp; Deploy</h5><p>Production-grade AI systems with monitoring and observability built-in</p></div></div>
+                        <div class="transform-step"><div class="step-num">4</div><div class="step-text"><h5>Scale &amp; Optimize</h5><p>Continuous improvement, model retraining, and performance tuning</p></div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Proof -->
+    <section class="social-proof" id="proof">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-label">Results</div>
+                <h2 class="section-title">Numbers That Matter</h2>
+                <p class="section-desc">Real impact from real deployments across industries.</p>
+            </div>
+            <div class="stats-grid reveal">
+                <div class="stat-card"><div class="stat-number">50+</div><div class="stat-label">Enterprise Deployments</div></div>
+                <div class="stat-card"><div class="stat-number">12M+</div><div class="stat-label">AI Decisions / Day</div></div>
+                <div class="stat-card"><div class="stat-number">73%</div><div class="stat-label">Avg. Cost Reduction</div></div>
+                <div class="stat-card"><div class="stat-number">99.97%</div><div class="stat-label">System Reliability</div></div>
+            </div>
+            <div class="testimonials reveal">
+                <div class="testimonial">
+                    <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <p>"GREYHOUND's Glass View transformed how our SRE team operates. We went from 4-hour MTTR to 12 minutes. It's like having X-ray vision for infrastructure."</p>
+                    <div class="testimonial-author"><div class="testimonial-avatar" style="background:var(--gradient-1);">VP</div><div><div class="testimonial-name">VP of Engineering</div><div class="testimonial-role">Series C Fintech</div></div></div>
+                </div>
+                <div class="testimonial">
+                    <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <p>"TETRIS screened 10,000 applicants in the time it took our team to review 50. The quality of hires has never been higher, and our bias metrics improved dramatically."</p>
+                    <div class="testimonial-author"><div class="testimonial-avatar" style="background:var(--gradient-2);">CH</div><div><div class="testimonial-name">Chief HR Officer</div><div class="testimonial-role">Global Enterprise</div></div></div>
+                </div>
+                <div class="testimonial">
+                    <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <p>"The AI transformation consultancy didn't just give us a roadmap — they built the road. $2M saved in year one, with a clear path to 5x that."</p>
+                    <div class="testimonial-author"><div class="testimonial-avatar" style="background:var(--gradient-3);">CT</div><div><div class="testimonial-name">CTO</div><div class="testimonial-role">Healthcare Platform</div></div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="contact-grid reveal">
+                <div class="contact-info">
+                    <div class="section-label" style="justify-content:flex-start;">Contact</div>
+                    <h3>Let's Build<br>Something Great</h3>
+                    <p>Whether you need a product demo, transformation advisory, or want to explore partnership — we're here.</p>
+                    <div class="contact-detail">
+                        <div class="contact-detail-icon">&#x2709;</div>
+                        <div class="contact-detail-text"><h5>Email</h5><p>hello@3gp.ai</p></div>
+                    </div>
+                    <div class="contact-detail">
+                        <div class="contact-detail-icon">&#x1f310;</div>
+                        <div class="contact-detail-text"><h5>Website</h5><p>3gp.ai</p></div>
+                    </div>
+                    <div class="contact-detail">
+                        <div class="contact-detail-icon">&#x1f4cd;</div>
+                        <div class="contact-detail-text"><h5>Headquarters</h5><p>Global &bull; Remote-First</p></div>
+                    </div>
+                </div>
+                <div class="contact-form-card">
+                    <form id="contactForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="name">Full Name *</label>
+                                <input type="text" id="name" name="name" required placeholder="John Doe" autocomplete="name">
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Work Email *</label>
+                                <input type="email" id="email" name="email" required placeholder="john@company.com" autocomplete="email">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="company">Company</label>
+                                <input type="text" id="company" name="company" placeholder="Acme Inc." autocomplete="organization">
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone</label>
+                                <input type="tel" id="phone" name="phone" placeholder="+1 (555) 000-0000" autocomplete="tel">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="product">Interested In</label>
+                            <select id="product" name="product">
+                                <option value="">Select a product or service</option>
+                                <option value="greyhound">GREYHOUND — Observability</option>
+                                <option value="tetris">TETRIS — Applicant Tracking</option>
+                                <option value="applymaster">ApplyMaster — Job Automation</option>
+                                <option value="consultancy">AI Transformation Consultancy</option>
+                                <option value="partnership">Partnership</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message *</label>
+                            <textarea id="message" name="message" required placeholder="Tell us about your needs..."></textarea>
+                        </div>
+                        <!-- Honeypot -->
+                        <div class="form-honeypot"><input type="text" name="_gotcha" tabindex="-1" autocomplete="off"></div>
+                        <button type="submit" class="btn btn-primary form-submit">
+                            Send Message
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+                        </button>
+                        <div class="spinner"></div>
+                        <div class="form-success" id="formSuccess"></div>
+                        <div class="form-error" id="formError"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta">
+        <div class="container">
+            <div class="cta-box reveal">
+                <h2>Ready to Build the Future?</h2>
+                <p>Whether you need a product or a partner, let's talk about what AI can actually do for your business.</p>
+                <div class="hero-actions">
+                    <a href="#contact" class="btn btn-primary">
+                        Get in Touch
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </a>
+                    <a href="#products" class="btn btn-secondary">View All Products</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="/" class="logo">
+                        <div class="logo-mark">3GP</div>
+                        <div class="logo-text"><span>3GP.AI</span></div>
+                    </a>
+                    <p>Building agentic AI products that transform how enterprises operate. From observability to automation — AI that works.</p>
+                    <div class="footer-socials">
+                        <a href="#" class="footer-social" aria-label="X / Twitter">&#x1D54F;</a>
+                        <a href="#" class="footer-social" aria-label="LinkedIn">in</a>
+                        <a href="#" class="footer-social" aria-label="GitHub">GH</a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h5>Products</h5>
+                    <a href="/greyhound">GREYHOUND</a>
+                    <a href="/tetris">TETRIS</a>
+                    <a href="/applymaster">ApplyMaster</a>
+                    <a href="/consultancy">AI Consultancy</a>
+                </div>
+                <div class="footer-col">
+                    <h5>Company</h5>
+                    <a href="/about">About</a>
+                    <a href="#">Careers</a>
+                    <a href="#">Blog</a>
+                    <a href="#">Press</a>
+                </div>
+                <div class="footer-col">
+                    <h5>Resources</h5>
+                    <a href="#">Documentation</a>
+                    <a href="#">API Reference</a>
+                    <a href="/api/health">Status</a>
+                    <a href="#contact">Contact</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>&copy; 2026 3GP.AI — All rights reserved.</span>
+                <div class="footer-bottom-links">
+                    <a href="/privacy">Privacy Policy</a>
+                    <a href="/terms">Terms of Service</a>
+                    <a href="#">Security</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/js/main.js"></script>
+</body>
+</html>

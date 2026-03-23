@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 — Page Not Found | 3GP.AI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        .error-page { min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; position: relative; z-index: 1; }
+        .error-code { font-size: clamp(6rem, 15vw, 12rem); font-weight: 900; letter-spacing: -4px; line-height: 1; background: var(--gradient-hero); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-size: 200% 200%; animation: gradientShift 8s ease-in-out infinite; }
+        .error-page h2 { font-size: 1.5rem; font-weight: 700; margin: 16px 0 12px; }
+        .error-page p { color: var(--text-secondary); margin-bottom: 32px; }
+    </style>
+</head>
+<body>
+    <div class="bg-grid"></div>
+    <div class="bg-orbs"><div class="orb orb-1"></div><div class="orb orb-2"></div></div>
+    <nav class="navbar scrolled"><div class="navbar-inner">
+        <a href="/" class="logo"><div class="logo-mark">3GP</div><div class="logo-text"><span>3GP.AI</span></div></a>
+    </div></nav>
+    <section class="error-page">
+        <div>
+            <div class="error-code">404</div>
+            <h2>Page Not Found</h2>
+            <p>The page you're looking for doesn't exist or has been moved.</p>
+            <a href="/" class="btn btn-primary">Back to Home <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        </div>
+    </section>
+</body>
+</html>
