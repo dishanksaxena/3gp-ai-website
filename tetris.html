@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TETRIS — AI-Native Applicant Tracking System | 3GP.AI</title>
+    <meta name="description" content="TETRIS is an AI-powered Applicant Tracking System that ranks candidates, detects bias, and automates your hiring pipeline.">
+    <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        /* Product Page Specific Styles */
+        .product-hero { min-height: 90vh; display: flex; align-items: center; padding: 120px 0 80px; position: relative; z-index: 1; }
+        .product-hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+        .product-hero-content .section-label { justify-content: flex-start; }
+        .product-hero-content h1 { font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 900; letter-spacing: -2px; line-height: 1.05; margin-bottom: 20px; }
+        .product-hero-content h1 .gradient-text { background: var(--gradient-2); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .product-hero-content > p { font-size: 1.15rem; color: var(--text-secondary); line-height: 1.7; margin-bottom: 32px; }
+        .product-hero-visual { position: relative; }
+
+        /* Teal accent overrides */
+        .teal-accent { color: var(--accent-2); }
+        .teal-bg { background: var(--gradient-2); }
+
+        /* Live Demo Mockup */
+        .demo-window { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; box-shadow: 0 40px 80px rgba(0,0,0,0.5); }
+        .demo-topbar { display: flex; align-items: center; gap: 8px; padding: 14px 20px; border-bottom: 1px solid var(--border); background: var(--bg-secondary); }
+        .demo-topbar .mockup-dot { width: 10px; height: 10px; border-radius: 50%; }
+        .demo-topbar .mockup-dot:nth-child(1) { background: #ff5f57; }
+        .demo-topbar .mockup-dot:nth-child(2) { background: #ffbd2e; }
+        .demo-topbar .mockup-dot:nth-child(3) { background: #28c840; }
+        .demo-url { flex: 1; text-align: center; font-size: 0.75rem; color: var(--text-muted); font-family: var(--font-mono); }
+        .demo-tabs { display: flex; gap: 0; margin-left: auto; }
+        .demo-tab { padding: 4px 12px; font-size: 0.65rem; font-weight: 600; border-radius: 4px; color: var(--text-muted); }
+        .demo-tab.active { background: rgba(0,206,201,0.2); color: var(--accent-2); }
+        .demo-body { padding: 20px; min-height: 350px; position: relative; }
+
+        /* Kanban Pipeline */
+        .kanban-container { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+        .kanban-column { background: var(--bg-secondary); border-radius: 10px; padding: 10px; min-height: 240px; }
+        .kanban-header { font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; padding: 6px 8px; margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between; }
+        .kanban-header .count { background: rgba(0,206,201,0.15); color: var(--accent-2); font-size: 0.6rem; padding: 2px 7px; border-radius: 50px; }
+        .kanban-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 10px; margin-bottom: 6px; transition: all 0.3s; cursor: default; }
+        .kanban-card:hover { border-color: var(--accent-2); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,206,201,0.15); }
+        .kanban-card-name { font-size: 0.7rem; font-weight: 600; margin-bottom: 4px; }
+        .kanban-card-role { font-size: 0.58rem; color: var(--text-muted); margin-bottom: 6px; }
+        .kanban-card-footer { display: flex; align-items: center; justify-content: space-between; }
+        .ai-score { font-size: 0.6rem; font-weight: 700; font-family: var(--font-mono); padding: 2px 6px; border-radius: 4px; }
+        .ai-score.high { background: rgba(0,206,201,0.15); color: var(--accent-2); }
+        .ai-score.mid { background: rgba(253,203,110,0.15); color: var(--accent-4); }
+        .ai-score.low { background: rgba(253,121,168,0.15); color: var(--accent-3); }
+        .kanban-card-status { width: 6px; height: 6px; border-radius: 50%; }
+
+        /* Animated candidate flow */
+        .kanban-card.flowing { animation: cardFlow 0.6s ease-out; }
+        @keyframes cardFlow { 0% { opacity: 0; transform: translateX(-20px) scale(0.95); } 100% { opacity: 1; transform: translateX(0) scale(1); } }
+
+        /* Progress bars in cards */
+        .kanban-progress { height: 3px; border-radius: 2px; background: var(--bg-secondary); margin-top: 6px; overflow: hidden; }
+        .kanban-progress-bar { height: 100%; border-radius: 2px; transition: width 1.5s ease-in-out; }
+
+        /* Metrics panel */
+        .demo-metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 12px; }
+        .demo-metric-card { padding: 10px; border-radius: 8px; background: var(--bg-glass); border: 1px solid var(--border); }
+        .demo-metric-label { font-size: 0.6rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
+        .demo-metric-value { font-size: 1.1rem; font-weight: 700; font-family: var(--font-mono); margin-top: 4px; }
+        .demo-metric-change { font-size: 0.6rem; margin-top: 2px; }
+        .text-green { color: var(--accent-2); }
+        .text-red { color: var(--accent-3); }
+
+        /* Features Section */
+        .features-section { padding: 120px 0; }
+        .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+        .feature-card { padding: 40px 32px; border-radius: var(--radius-lg); background: var(--bg-card); border: 1px solid var(--border); transition: var(--transition); position: relative; overflow: hidden; }
+        .feature-card:hover { border-color: var(--border-hover); transform: translateY(-4px); box-shadow: var(--shadow-glow); }
+        .feature-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--gradient-2); opacity: 0; transition: var(--transition); }
+        .feature-card:hover::before { opacity: 1; }
+        .feature-icon { width: 52px; height: 52px; border-radius: 14px; background: var(--gradient-2); display: flex; align-items: center; justify-content: center; margin-bottom: 20px; font-size: 1.4rem; }
+        .feature-card h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 10px; }
+        .feature-card p { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.65; }
+
+        /* AI Scoring Showcase */
+        .scoring-section { padding: 120px 0; }
+        .scoring-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+        .scoring-demo { border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--border); background: var(--bg-card); }
+        .scoring-demo-header { padding: 16px 20px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+        .scoring-demo-body { padding: 24px; min-height: 280px; position: relative; }
+
+        /* Candidate scoring rows */
+        .score-candidate { display: flex; align-items: center; gap: 14px; padding: 14px 16px; border-radius: 10px; margin-bottom: 10px; border: 1px solid var(--border); background: var(--bg-secondary); transition: all 0.3s; }
+        .score-candidate:hover { border-color: var(--accent-2); }
+        .score-avatar { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 700; color: #fff; flex-shrink: 0; }
+        .score-info { flex: 1; }
+        .score-name { font-size: 0.82rem; font-weight: 600; margin-bottom: 2px; }
+        .score-role { font-size: 0.68rem; color: var(--text-muted); }
+        .score-bar-container { flex: 1; max-width: 120px; }
+        .score-bar-bg { height: 6px; border-radius: 3px; background: var(--bg-glass); overflow: hidden; }
+        .score-bar-fill { height: 100%; border-radius: 3px; transition: width 2s ease-out; }
+        .score-value { font-size: 0.85rem; font-weight: 800; font-family: var(--font-mono); min-width: 40px; text-align: right; }
+
+        /* Animated skill tags */
+        .score-tags { display: flex; gap: 4px; margin-top: 4px; }
+        .score-tag { font-size: 0.55rem; padding: 2px 6px; border-radius: 4px; background: rgba(0,206,201,0.1); color: var(--accent-2); font-weight: 500; }
+
+        /* Data flow dots */
+        .data-flow-dot { position: absolute; width: 6px; height: 6px; border-radius: 50%; animation: flowDown 2s linear infinite; }
+        @keyframes flowDown { 0% { top: 0; opacity: 0; } 20% { opacity: 1; } 80% { opacity: 1; } 100% { top: 100%; opacity: 0; } }
+
+        /* Pulsing ring animation for scores */
+        .score-ring { position: relative; width: 48px; height: 48px; flex-shrink: 0; }
+        .score-ring svg { transform: rotate(-90deg); }
+        .score-ring-value { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: 800; font-family: var(--font-mono); }
+        .score-ring-circle { animation: ringDraw 2s ease-out forwards; }
+        @keyframes ringDraw { 0% { stroke-dashoffset: 126; } }
+
+        .scoring-content h3 { font-size: 2rem; font-weight: 800; letter-spacing: -1px; margin-bottom: 16px; }
+        .scoring-content p { color: var(--text-secondary); font-size: 1rem; line-height: 1.7; margin-bottom: 24px; }
+        .scoring-features { display: flex; flex-direction: column; gap: 16px; }
+        .scoring-feature { display: flex; gap: 12px; align-items: start; }
+        .scoring-feature-check { width: 24px; height: 24px; border-radius: 50%; background: rgba(0,206,201,0.15); display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: var(--accent-2); font-size: 0.75rem; font-weight: 700; }
+        .scoring-feature-text h5 { font-size: 0.9rem; font-weight: 600; margin-bottom: 2px; }
+        .scoring-feature-text p { font-size: 0.82rem; color: var(--text-secondary); margin: 0; }
+
+        /* How It Works */
+        .how-section { padding: 120px 0; }
+        .how-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 64px; }
+        .how-step { text-align: center; position: relative; }
+        .how-step::after { content: ''; position: absolute; top: 32px; right: -12px; width: 24px; height: 2px; background: var(--border); }
+        .how-step:last-child::after { display: none; }
+        .how-step-num { width: 64px; height: 64px; border-radius: 50%; background: var(--gradient-2); display: flex; align-items: center; justify-content: center; font-size: 1.4rem; font-weight: 800; margin: 0 auto 20px; color: #fff; }
+        .how-step h4 { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
+        .how-step p { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; }
+
+        /* Pricing Teaser */
+        .pricing-section { padding: 120px 0; }
+        .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+        .pricing-card { padding: 40px 32px; border-radius: var(--radius-lg); background: var(--bg-card); border: 1px solid var(--border); transition: var(--transition); text-align: center; }
+        .pricing-card:hover { border-color: var(--border-hover); }
+        .pricing-card.featured { border-color: var(--accent-2); background: linear-gradient(180deg, rgba(0,206,201,0.06), var(--bg-card)); }
+        .pricing-card.featured::before { content: 'Most Popular'; position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--gradient-2); color: #fff; font-size: 0.7rem; font-weight: 600; padding: 4px 16px; border-radius: 50px; }
+        .pricing-tier { font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; color: var(--accent-2); margin-bottom: 12px; }
+        .pricing-price { font-size: 2.5rem; font-weight: 900; letter-spacing: -2px; margin-bottom: 4px; }
+        .pricing-period { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 24px; }
+        .pricing-features { text-align: left; margin-bottom: 28px; }
+        .pricing-feature { display: flex; align-items: center; gap: 10px; padding: 8px 0; font-size: 0.85rem; color: var(--text-secondary); }
+        .pricing-feature::before { content: '\2713'; color: var(--accent-2); font-weight: 700; }
+        .pricing-btn { width: 100%; }
+
+        /* Responsive */
+        @media (max-width: 1024px) { .product-hero-grid, .scoring-grid { grid-template-columns: 1fr; } .features-grid { grid-template-columns: 1fr 1fr; } .how-steps { grid-template-columns: 1fr 1fr; } .how-step::after { display: none; } .kanban-container { grid-template-columns: 1fr 1fr; } }
+        @media (max-width: 768px) { .features-grid, .pricing-grid { grid-template-columns: 1fr; } .how-steps { grid-template-columns: 1fr; } .demo-metrics { grid-template-columns: 1fr; } .kanban-container { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <div class="bg-grid"></div>
+    <div class="bg-orbs"><div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div></div>
+    <div class="cursor-dot" id="cursorDot"></div>
+
+    <!-- Navbar -->
+    <nav class="navbar scrolled" id="navbar">
+        <div class="navbar-inner">
+            <a href="/" class="logo"><div class="logo-mark">3GP</div><div class="logo-text"><span>3GP.AI</span></div></a>
+            <div class="nav-links" id="navLinks">
+                <a href="/#products">Products</a>
+                <a href="/#capabilities">Capabilities</a>
+                <a href="/#transformation">Services</a>
+                <a href="/#proof">Results</a>
+                <a href="/#contact" class="nav-cta">Get Started</a>
+            </div>
+            <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+        </div>
+    </nav>
+
+    <!-- Product Hero -->
+    <section class="product-hero">
+        <div class="container">
+            <div class="product-hero-grid">
+                <div class="product-hero-content">
+                    <div class="section-label" style="justify-content:flex-start;">AI-Native ATS</div>
+                    <h1>Hire Smarter with<br><span class="gradient-text">AI Precision</span></h1>
+                    <p>TETRIS is an AI-native Applicant Tracking System that doesn't just organize candidates — it ranks, screens, and surfaces the best talent automatically. Let AI handle the pipeline while you focus on people.</p>
+                    <div class="hero-actions" style="justify-content:flex-start;">
+                        <a href="/#contact" class="btn btn-primary" style="background:var(--gradient-2);">Request Demo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+                        <a href="#features" class="btn btn-secondary">See Features</a>
+                    </div>
+                </div>
+                <div class="product-hero-visual">
+                    <div class="demo-window">
+                        <div class="demo-topbar">
+                            <span class="mockup-dot"></span><span class="mockup-dot"></span><span class="mockup-dot"></span>
+                            <span class="demo-url">tetris.3gp.ai/pipeline</span>
+                            <div class="demo-tabs">
+                                <span class="demo-tab active">Pipeline</span>
+                                <span class="demo-tab">Analytics</span>
+                            </div>
+                        </div>
+                        <div class="demo-body">
+                            <div class="kanban-container" id="kanbanBoard">
+                                <!-- Applied Column -->
+                                <div class="kanban-column">
+                                    <div class="kanban-header">Applied <span class="count">12</span></div>
+                                    <div class="kanban-card flowing" style="animation-delay: 0.1s;">
+                                        <div class="kanban-card-name">Sarah Chen</div>
+                                        <div class="kanban-card-role">Sr. Frontend Engineer</div>
+                                        <div class="kanban-card-footer">
+                                            <span class="ai-score high">AI: 94</span>
+                                            <span class="kanban-card-status" style="background:var(--accent-2);"></span>
+                                        </div>
+                                        <div class="kanban-progress"><div class="kanban-progress-bar" style="width:94%;background:var(--accent-2);"></div></div>
+                                    </div>
+                                    <div class="kanban-card flowing" style="animation-delay: 0.3s;">
+                                        <div class="kanban-card-name">James Liu</div>
+                                        <div class="kanban-card-role">Full Stack Developer</div>
+                                        <div class="kanban-card-footer">
+                                            <span class="ai-score mid">AI: 72</span>
+                                            <span class="kanban-card-status" style="background:var(--accent-4);"></span>
+                                        </div>
+                                        <div class="kanban-progress"><div class="kanban-progress-bar" style="width:72%;background:var(--accent-4);"></div></div>
+                                    </div>
+                                    <div class="kanban-card flowing" style="animation-delay: 0.5s;">
+                                        <div class="kanban-card-name">Priya Patel</div>
+                                        <div class="kanban-card-role">React Developer</div>
+                                        <div class="kanban-card-footer">
+                                            <span class="ai-score high">AI: 88</span>
+                                            <span class="kanban-card-status" style="background:var(--accent-2);"></span>
+                                        </div>
+                                        <div class="kanban-progress"><div class="kanban-progress-bar" style="width:88%;background:var(--accent-2);"></div></div>
+                                    </div>
+                                </div>
+                                <!-- Screening Column -->
+                                <div class="kanban-column">
+                                    <div class="kanban-header">Screening <span class="count">8</span></div>
+                                    <div class="kanban-card flowing" style="animation-delay: 0.2s;">
+                                        <div class="kanban-card-name">Alex Rivera</div>
+                                        <div class="kanban-card-role">Backend Engineer</div>
+                                        <div class="kanban-card-footer">
+                                            <span class="ai-score high">AI: 91</span>
+                                            <span class="kanban-card-status" style="background:var(--accent-2);"></span>
+                                        </div>
+                                        <div class="kanban-progress"><div class="kanban-progress-bar" style="width:91%;background:var(--accent-2);"></div></div>
+                                    </div>
+                                    <div class="kanban-card flowing" style="animation-delay: 0.4s;">
+                                        <div class="kanban-card-name">Emma Wilson</div>
+                                        <div class="kanban-card-role">DevOps Engineer</div>
+                                        <div class="kanban-card-footer">
+                                            <span class="ai-score mid">AI: 78</span>
+                                            <span class="kanban-card-status" style="background:var(--accent-4);"></span>
+                                        </div>
+                                        <div class="kanban-progress"><div class="kanban-progress-bar" style="width:78%;background:var(--accent-4);"></div></div>
+                                    </div>
+                                </div>
+                                <!-- Interview Column -->
+                                <div class="kanban-column">
+                                    <div class="kanban-header">Interview <span class="count">5</span></div>
+                                    <div class="kanban-card flowing" style="animation-delay: 0.3s;">
+                                        <div class="kanban-card-name">Michael Osei</div>
+                                        <div class="kanban-card-role">ML Engineer</div>
+                                        <div class="kanban-card-footer">
+                                            <span class="ai-score high">AI: 96</span>
+                                            <span class="kanban-card-status" style="background:var(--accent-2);"></span>
+                                        </div>
+                                        <div class="kanban-progress"><div class="kanban-progress-bar" style="width:96%;background:var(--accent-2);"></div></div>
+                                    </div>
+                                    <div class="kanban-card flowing" style="animation-delay: 0.5s;">
+                                        <div class="kanban-card-name">Nina Kowalski</div>
+                                        <div class="kanban-card-role">Data Scientist</div>
+                                        <div class="kanban-card-footer">
+                                            <span class="ai-score high">AI: 89</span>
+                                            <span class="kanban-card-status" style="background:var(--accent-2);"></span>
+                                        </div>
+                                        <div class="kanban-progress"><div class="kanban-progress-bar" style="width:89%;background:var(--accent-2);"></div></div>
+                                    </div>
+                                </div>
+                                <!-- Offer Column -->
+                                <div class="kanban-column">
+                                    <div class="kanban-header">Offer <span class="count">2</span></div>
+                                    <div class="kanban-card flowing" style="animation-delay: 0.4s;">
+                                        <div class="kanban-card-name">David Kim</div>
+                                        <div class="kanban-card-role">Staff Engineer</div>
+                                        <div class="kanban-card-footer">
+                                            <span class="ai-score high">AI: 97</span>
+                                            <span class="kanban-card-status" style="background:var(--accent-2);"></span>
+                                        </div>
+                                        <div class="kanban-progress"><div class="kanban-progress-bar" style="width:97%;background:var(--accent-2);"></div></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="demo-metrics">
+                                <div class="demo-metric-card">
+                                    <div class="demo-metric-label">Time to Hire</div>
+                                    <div class="demo-metric-value text-green">18 days</div>
+                                    <div class="demo-metric-change text-green">&darr; 42% vs. industry avg</div>
+                                </div>
+                                <div class="demo-metric-card">
+                                    <div class="demo-metric-label">Pipeline Health</div>
+                                    <div class="demo-metric-value text-green">94%</div>
+                                    <div class="demo-metric-change text-green">&uarr; 12% this quarter</div>
+                                </div>
+                                <div class="demo-metric-card">
+                                    <div class="demo-metric-label">AI Accuracy</div>
+                                    <div class="demo-metric-value" style="color:var(--accent-2);">97.3%</div>
+                                    <div class="demo-metric-change text-green">&uarr; 2.1% from last month</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features-section" id="features">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-label">Core Features</div>
+                <h2 class="section-title">Intelligent Hiring, End to End</h2>
+                <p class="section-desc">Six AI-powered capabilities that transform your recruiting process from guesswork to precision.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card reveal">
+                    <div class="feature-icon">&#x1f3af;</div>
+                    <h3>AI Candidate Ranking</h3>
+                    <p>Machine learning models analyze resumes, experience, and skills to produce a match score for every applicant — surfacing top talent in seconds, not hours.</p>
+                </div>
+                <div class="feature-card reveal">
+                    <div class="feature-icon">&#x1f50d;</div>
+                    <h3>Smart Screening</h3>
+                    <p>Automated screening questions, resume parsing, and qualification checks filter candidates intelligently. Only the most relevant reach your inbox.</p>
+                </div>
+                <div class="feature-card reveal">
+                    <div class="feature-icon">&#x1f4ca;</div>
+                    <h3>Pipeline Analytics</h3>
+                    <p>Real-time dashboards track time-to-hire, drop-off rates, source effectiveness, and funnel conversion. Make data-driven recruiting decisions.</p>
+                </div>
+                <div class="feature-card reveal">
+                    <div class="feature-icon">&#x1f6e1;&#xfe0f;</div>
+                    <h3>Bias Detection</h3>
+                    <p>Built-in fairness algorithms monitor your pipeline for demographic bias. Get alerts and actionable recommendations to ensure equitable hiring.</p>
+                </div>
+                <div class="feature-card reveal">
+                    <div class="feature-icon">&#x1f4c5;</div>
+                    <h3>Interview Scheduling</h3>
+                    <p>AI coordinates availability across candidates and panel members. Automatic time zone detection, calendar sync, and conflict resolution built in.</p>
+                </div>
+                <div class="feature-card reveal">
+                    <div class="feature-icon">&#x1f91d;</div>
+                    <h3>Collaborative Hiring</h3>
+                    <p>Shared scorecards, @mentions, structured feedback, and approval workflows. Align your entire hiring team on every decision with full transparency.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Scoring Showcase -->
+    <section class="scoring-section">
+        <div class="container">
+            <div class="scoring-grid reveal">
+                <div class="scoring-demo">
+                    <div class="scoring-demo-header">
+                        <span style="font-size:0.8rem;font-weight:600;">AI Match Scores</span>
+                        <div style="display:flex;gap:4px;padding:3px;border-radius:8px;background:var(--bg-secondary);">
+                            <button style="padding:6px 14px;border-radius:6px;font-size:0.7rem;font-weight:600;cursor:pointer;color:var(--text-muted);background:none;border:none;" onclick="filterCandidates('all')" id="filterAll">All</button>
+                            <button style="padding:6px 14px;border-radius:6px;font-size:0.7rem;font-weight:600;cursor:pointer;background:var(--gradient-2);color:#fff;border:none;" onclick="filterCandidates('top')" id="filterTop">Top Matches</button>
+                        </div>
+                    </div>
+                    <div class="scoring-demo-body" id="scoringDemo">
+                        <div class="score-candidate" data-score="96">
+                            <div class="score-avatar" style="background:linear-gradient(135deg,#00cec9,#00b894);">MO</div>
+                            <div class="score-info">
+                                <div class="score-name">Michael Osei</div>
+                                <div class="score-role">ML Engineer &middot; 8 yrs exp</div>
+                                <div class="score-tags"><span class="score-tag">PyTorch</span><span class="score-tag">MLOps</span><span class="score-tag">Python</span></div>
+                            </div>
+                            <div class="score-ring">
+                                <svg width="48" height="48" viewBox="0 0 48 48">
+                                    <circle cx="24" cy="24" r="20" fill="none" stroke="var(--border)" stroke-width="3"/>
+                                    <circle cx="24" cy="24" r="20" fill="none" stroke="var(--accent-2)" stroke-width="3" stroke-dasharray="126" stroke-dashoffset="5" class="score-ring-circle" stroke-linecap="round"/>
+                                </svg>
+                                <div class="score-ring-value text-green">96</div>
+                            </div>
+                        </div>
+                        <div class="score-candidate" data-score="94">
+                            <div class="score-avatar" style="background:linear-gradient(135deg,#6c5ce7,#a29bfe);">SC</div>
+                            <div class="score-info">
+                                <div class="score-name">Sarah Chen</div>
+                                <div class="score-role">Sr. Frontend &middot; 6 yrs exp</div>
+                                <div class="score-tags"><span class="score-tag">React</span><span class="score-tag">TypeScript</span><span class="score-tag">Next.js</span></div>
+                            </div>
+                            <div class="score-ring">
+                                <svg width="48" height="48" viewBox="0 0 48 48">
+                                    <circle cx="24" cy="24" r="20" fill="none" stroke="var(--border)" stroke-width="3"/>
+                                    <circle cx="24" cy="24" r="20" fill="none" stroke="var(--accent-2)" stroke-width="3" stroke-dasharray="126" stroke-dashoffset="8" class="score-ring-circle" stroke-linecap="round" style="animation-delay:0.3s;"/>
+                                </svg>
+                                <div class="score-ring-value text-green">94</div>
+                            </div>
+                        </div>
+                        <div class="score-candidate" data-score="89">
+                            <div class="score-avatar" style="background:linear-gradient(135deg,#fd79a8,#e84393);">NK</div>
+                            <div class="score-info">
+                                <div class="score-name">Nina Kowalski</div>
+                                <div class="score-role">Data Scientist &middot; 5 yrs exp</div>
+                                <div class="score-tags"><span class="score-tag">TensorFlow</span><span class="score-tag">SQL</span><span class="score-tag">R</span></div>
+                            </div>
+                            <div class="score-ring">
+                                <svg width="48" height="48" viewBox="0 0 48 48">
+                                    <circle cx="24" cy="24" r="20" fill="none" stroke="var(--border)" stroke-width="3"/>
+                                    <circle cx="24" cy="24" r="20" fill="none" stroke="var(--accent-2)" stroke-width="3" stroke-dasharray="126" stroke-dashoffset="14" class="score-ring-circle" stroke-linecap="round" style="animation-delay:0.6s;"/>
+                                </svg>
+                                <div class="score-ring-value text-green">89</div>
+                            </div>
+                        </div>
+                        <div class="score-candidate" data-score="72" id="lowScore1">
+                            <div class="score-avatar" style="background:linear-gradient(135deg,#fdcb6e,#f39c12);">JL</div>
+                            <div class="score-info">
+                                <div class="score-name">James Liu</div>
+                                <div class="score-role">Full Stack Dev &middot; 3 yrs exp</div>
+                                <div class="score-tags"><span class="score-tag">Node.js</span><span class="score-tag">Vue</span></div>
+                            </div>
+                            <div class="score-ring">
+                                <svg width="48" height="48" viewBox="0 0 48 48">
+                                    <circle cx="24" cy="24" r="20" fill="none" stroke="var(--border)" stroke-width="3"/>
+                                    <circle cx="24" cy="24" r="20" fill="none" stroke="var(--accent-4)" stroke-width="3" stroke-dasharray="126" stroke-dashoffset="35" class="score-ring-circle" stroke-linecap="round" style="animation-delay:0.9s;"/>
+                                </svg>
+                                <div class="score-ring-value" style="color:var(--accent-4);">72</div>
+                            </div>
+                        </div>
+                        <div class="score-candidate" data-score="58" id="lowScore2">
+                            <div class="score-avatar" style="background:linear-gradient(135deg,#636e72,#b2bec3);">TN</div>
+                            <div class="score-info">
+                                <div class="score-name">Tom Nguyen</div>
+                                <div class="score-role">Junior Developer &middot; 1 yr exp</div>
+                                <div class="score-tags"><span class="score-tag">JavaScript</span><span class="score-tag">HTML</span></div>
+                            </div>
+                            <div class="score-ring">
+                                <svg width="48" height="48" viewBox="0 0 48 48">
+                                    <circle cx="24" cy="24" r="20" fill="none" stroke="var(--border)" stroke-width="3"/>
+                                    <circle cx="24" cy="24" r="20" fill="none" stroke="var(--accent-3)" stroke-width="3" stroke-dasharray="126" stroke-dashoffset="53" class="score-ring-circle" stroke-linecap="round" style="animation-delay:1.2s;"/>
+                                </svg>
+                                <div class="score-ring-value" style="color:var(--accent-3);">58</div>
+                            </div>
+                        </div>
+                        <div class="data-flow-dot" style="left:15%;background:var(--accent-2);"></div>
+                        <div class="data-flow-dot" style="left:75%;background:var(--accent-2);animation-delay:-0.7s;"></div>
+                    </div>
+                </div>
+                <div class="scoring-content">
+                    <h3>AI-Powered<br>Candidate Scoring</h3>
+                    <p>TETRIS uses multi-dimensional analysis to score every candidate against your job requirements. Skills, experience, culture fit, and growth potential are all factored into a single, explainable score.</p>
+                    <div class="scoring-features">
+                        <div class="scoring-feature">
+                            <div class="scoring-feature-check">&#x2713;</div>
+                            <div class="scoring-feature-text"><h5>Multi-Signal Analysis</h5><p>Evaluates resume, portfolio, references, and assessment results simultaneously</p></div>
+                        </div>
+                        <div class="scoring-feature">
+                            <div class="scoring-feature-check">&#x2713;</div>
+                            <div class="scoring-feature-text"><h5>Explainable AI</h5><p>Every score comes with a breakdown showing exactly why a candidate ranked where they did</p></div>
+                        </div>
+                        <div class="scoring-feature">
+                            <div class="scoring-feature-check">&#x2713;</div>
+                            <div class="scoring-feature-text"><h5>Continuous Learning</h5><p>The model improves with each hire, learning which signals predict successful placements</p></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-section">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-label">How It Works</div>
+                <h2 class="section-title">From Job Post to Perfect Hire</h2>
+                <p class="section-desc">Four simple steps to transform your hiring process with AI-driven intelligence.</p>
+            </div>
+            <div class="how-steps reveal">
+                <div class="how-step">
+                    <div class="how-step-num">1</div>
+                    <h4>Define Your Role</h4>
+                    <p>Create a job posting and TETRIS automatically generates ideal candidate criteria using AI analysis of successful hires.</p>
+                </div>
+                <div class="how-step">
+                    <div class="how-step-num">2</div>
+                    <h4>AI Screens &amp; Ranks</h4>
+                    <p>Every applicant is instantly scored and ranked. AI parses resumes, matches skills, and flags top candidates automatically.</p>
+                </div>
+                <div class="how-step">
+                    <div class="how-step-num">3</div>
+                    <h4>Collaborate &amp; Interview</h4>
+                    <p>Your team reviews AI recommendations, schedules interviews with one click, and shares structured feedback in real time.</p>
+                </div>
+                <div class="how-step">
+                    <div class="how-step-num">4</div>
+                    <h4>Hire with Confidence</h4>
+                    <p>Data-backed insights ensure you pick the right candidate. TETRIS learns from outcomes to improve future recommendations.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing -->
+    <section class="pricing-section">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-label">Pricing</div>
+                <h2 class="section-title">Plans That Scale with You</h2>
+                <p class="section-desc">Start free. Upgrade as your team grows. No per-candidate fees, ever.</p>
+            </div>
+            <div class="pricing-grid reveal">
+                <div class="pricing-card">
+                    <div class="pricing-tier">Starter</div>
+                    <div class="pricing-price">Free</div>
+                    <div class="pricing-period">Up to 3 active roles</div>
+                    <div class="pricing-features">
+                        <div class="pricing-feature">3 job postings</div>
+                        <div class="pricing-feature">Basic AI scoring</div>
+                        <div class="pricing-feature">Kanban pipeline</div>
+                        <div class="pricing-feature">Email notifications</div>
+                    </div>
+                    <a href="/#contact" class="btn btn-secondary pricing-btn">Get Started Free</a>
+                </div>
+                <div class="pricing-card featured" style="position:relative;">
+                    <div class="pricing-tier">Pro</div>
+                    <div class="pricing-price">$199<span style="font-size:1rem;font-weight:400;color:var(--text-muted);">/mo</span></div>
+                    <div class="pricing-period">Unlimited active roles</div>
+                    <div class="pricing-features">
+                        <div class="pricing-feature">Unlimited job postings</div>
+                        <div class="pricing-feature">Advanced AI ranking</div>
+                        <div class="pricing-feature">Bias detection</div>
+                        <div class="pricing-feature">Interview scheduling</div>
+                        <div class="pricing-feature">Pipeline analytics</div>
+                        <div class="pricing-feature">Priority support</div>
+                    </div>
+                    <a href="/#contact" class="btn btn-primary pricing-btn" style="background:var(--gradient-2);">Start 14-Day Trial</a>
+                </div>
+                <div class="pricing-card">
+                    <div class="pricing-tier">Enterprise</div>
+                    <div class="pricing-price">Custom</div>
+                    <div class="pricing-period">For large hiring teams</div>
+                    <div class="pricing-features">
+                        <div class="pricing-feature">Everything in Pro</div>
+                        <div class="pricing-feature">SSO / SAML</div>
+                        <div class="pricing-feature">Custom AI models</div>
+                        <div class="pricing-feature">ATS integrations</div>
+                        <div class="pricing-feature">Dedicated success manager</div>
+                        <div class="pricing-feature">Custom SLA</div>
+                    </div>
+                    <a href="/#contact" class="btn btn-secondary pricing-btn">Contact Sales</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta" style="padding:120px 0;">
+        <div class="container">
+            <div class="cta-box reveal">
+                <h2>Ready to Transform Your Hiring?</h2>
+                <p>Deploy TETRIS in minutes. Start making AI-powered hiring decisions from day one.</p>
+                <div class="hero-actions">
+                    <a href="/#contact" class="btn btn-primary" style="background:var(--gradient-2);">Request a Demo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+                    <a href="/" class="btn btn-secondary">Back to 3GP.AI</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="/" class="logo"><div class="logo-mark">3GP</div><div class="logo-text"><span>3GP.AI</span></div></a>
+                    <p>Building agentic AI products that transform how enterprises operate.</p>
+                </div>
+                <div class="footer-col"><h5>Products</h5><a href="/openspy">OpenSPY</a><a href="/tetris">TETRIS</a><a href="/applymaster">ApplyMaster</a><a href="/consultancy">AI Consultancy</a></div>
+                <div class="footer-col"><h5>Company</h5><a href="/about">About</a><a href="#">Careers</a><a href="#">Blog</a></div>
+                <div class="footer-col"><h5>Resources</h5><a href="#">Documentation</a><a href="#">API Reference</a><a href="/#contact">Contact</a></div>
+            </div>
+            <div class="footer-bottom"><span>&copy; 2026 3GP.AI — All rights reserved.</span><div class="footer-bottom-links"><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div></div>
+        </div>
+    </footer>
+
+    <script src="/js/main.js"></script>
+    <script>
+        // Filter candidates in scoring demo
+        function filterCandidates(mode) {
+            var filterAll = document.getElementById('filterAll');
+            var filterTop = document.getElementById('filterTop');
+            var low1 = document.getElementById('lowScore1');
+            var low2 = document.getElementById('lowScore2');
+            if (mode === 'top') {
+                filterTop.style.background = 'var(--gradient-2)';
+                filterTop.style.color = '#fff';
+                filterAll.style.background = 'none';
+                filterAll.style.color = 'var(--text-muted)';
+                if (low1) { low1.style.opacity = '0.3'; low1.style.transform = 'scale(0.97)'; }
+                if (low2) { low2.style.opacity = '0.3'; low2.style.transform = 'scale(0.97)'; }
+            } else {
+                filterAll.style.background = 'var(--gradient-2)';
+                filterAll.style.color = '#fff';
+                filterTop.style.background = 'none';
+                filterTop.style.color = 'var(--text-muted)';
+                if (low1) { low1.style.opacity = '1'; low1.style.transform = 'scale(1)'; }
+                if (low2) { low2.style.opacity = '1'; low2.style.transform = 'scale(1)'; }
+            }
+        }
+
+        // Animate kanban cards periodically to simulate flow
+        (function() {
+            var cards = document.querySelectorAll('.kanban-card');
+            setInterval(function() {
+                var idx = Math.floor(Math.random() * cards.length);
+                cards[idx].style.transition = 'all 0.4s';
+                cards[idx].style.boxShadow = '0 0 20px rgba(0,206,201,0.25)';
+                cards[idx].style.borderColor = 'var(--accent-2)';
+                setTimeout(function() {
+                    cards[idx].style.boxShadow = '';
+                    cards[idx].style.borderColor = 'var(--border)';
+                }, 1200);
+            }, 2500);
+        })();
+
+        // Animate progress bars on scroll
+        (function() {
+            var observed = false;
+            var observer = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting && !observed) {
+                        observed = true;
+                        document.querySelectorAll('.kanban-progress-bar').forEach(function(bar) {
+                            var w = bar.style.width;
+                            bar.style.width = '0%';
+                            setTimeout(function() { bar.style.width = w; }, 200);
+                        });
+                    }
+                });
+            }, { threshold: 0.3 });
+            var board = document.getElementById('kanbanBoard');
+            if (board) observer.observe(board);
+        })();
+    </script>
+</body>
+</html>

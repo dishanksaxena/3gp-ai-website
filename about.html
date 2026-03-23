@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About — Building AI That Actually Works | 3GP.AI</title>
+    <meta name="description" content="3GP.AI is building agentic AI products that deliver real business outcomes. Learn about our mission, values, and the team behind the technology.">
+    <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        /* About Page Styles */
+        .about-hero { min-height: 80vh; display: flex; align-items: center; padding: 120px 0 80px; position: relative; z-index: 1; text-align: center; }
+        .about-hero h1 { font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 900; letter-spacing: -2px; line-height: 1.05; margin-bottom: 24px; }
+        .about-hero h1 .gradient-text { background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .about-hero > .container > p { font-size: 1.2rem; color: var(--text-secondary); line-height: 1.7; max-width: 640px; margin: 0 auto; }
+
+        /* Story Section */
+        .story-section { padding: 120px 0; }
+        .story-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+        .story-content h3 { font-size: 2rem; font-weight: 800; letter-spacing: -1px; margin-bottom: 20px; }
+        .story-content p { color: var(--text-secondary); font-size: 1rem; line-height: 1.8; margin-bottom: 16px; }
+        .story-visual { position: relative; }
+        .story-card { padding: 40px; border-radius: var(--radius-lg); background: var(--bg-card); border: 1px solid var(--border); }
+        .story-card-icon { font-size: 2.5rem; margin-bottom: 16px; }
+        .story-card blockquote { font-size: 1.1rem; font-style: italic; color: var(--text-secondary); line-height: 1.7; border-left: 3px solid var(--accent-1); padding-left: 20px; margin: 0; }
+
+        /* Values Section */
+        .values-section { padding: 120px 0; }
+        .values-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+        .value-card { padding: 40px 28px; border-radius: var(--radius-lg); background: var(--bg-card); border: 1px solid var(--border); transition: var(--transition); text-align: center; position: relative; overflow: hidden; }
+        .value-card:hover { border-color: var(--border-hover); transform: translateY(-4px); box-shadow: var(--shadow-glow); }
+        .value-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--gradient-1); opacity: 0; transition: var(--transition); }
+        .value-card:hover::before { opacity: 1; }
+        .value-icon { width: 64px; height: 64px; border-radius: 16px; background: var(--gradient-1); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 1.6rem; }
+        .value-card h4 { font-size: 1.1rem; font-weight: 700; margin-bottom: 10px; }
+        .value-card p { font-size: 0.88rem; color: var(--text-secondary); line-height: 1.65; }
+
+        /* Team Section */
+        .team-section { padding: 120px 0; }
+        .team-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; margin-top: 64px; }
+        .team-card { text-align: center; }
+        .team-avatar { width: 120px; height: 120px; border-radius: 50%; margin: 0 auto 20px; display: flex; align-items: center; justify-content: center; font-size: 2.2rem; font-weight: 800; color: #fff; letter-spacing: -1px; }
+        .team-avatar.a1 { background: linear-gradient(135deg, #6c5ce7, #a29bfe); }
+        .team-avatar.a2 { background: linear-gradient(135deg, #00cec9, #81ecec); }
+        .team-avatar.a3 { background: linear-gradient(135deg, #fd79a8, #fab1a0); }
+        .team-avatar.a4 { background: linear-gradient(135deg, #fdcb6e, #f39c12); }
+        .team-card h4 { font-size: 1.05rem; font-weight: 700; margin-bottom: 4px; }
+        .team-card .team-role { font-size: 0.82rem; color: var(--accent-1); font-weight: 600; margin-bottom: 8px; }
+        .team-card p { font-size: 0.82rem; color: var(--text-secondary); line-height: 1.6; }
+
+        /* Stats Section */
+        .stats-section { padding: 80px 0; }
+        .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; }
+        .stat-item { text-align: center; padding: 32px 16px; border-radius: var(--radius-lg); background: var(--bg-card); border: 1px solid var(--border); }
+        .stat-number { font-size: 2.5rem; font-weight: 900; letter-spacing: -2px; background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 4px; }
+        .stat-label { font-size: 0.85rem; color: var(--text-secondary); }
+
+        /* Responsive */
+        @media (max-width: 1024px) { .story-grid { grid-template-columns: 1fr; } .values-grid, .team-grid { grid-template-columns: 1fr 1fr; } }
+        @media (max-width: 768px) { .values-grid, .team-grid, .stats-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <div class="bg-grid"></div>
+    <div class="bg-orbs"><div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div></div>
+    <div class="cursor-dot" id="cursorDot"></div>
+
+    <!-- Navbar -->
+    <nav class="navbar scrolled" id="navbar">
+        <div class="navbar-inner">
+            <a href="/" class="logo"><div class="logo-mark">3GP</div><div class="logo-text"><span>3GP.AI</span></div></a>
+            <div class="nav-links" id="navLinks">
+                <a href="/#products">Products</a>
+                <a href="/#capabilities">Capabilities</a>
+                <a href="/#transformation">Services</a>
+                <a href="/#proof">Results</a>
+                <a href="/#contact" class="nav-cta">Get Started</a>
+            </div>
+            <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="about-hero">
+        <div class="container">
+            <div class="section-label">About Us</div>
+            <h1>Building AI That<br><span class="gradient-text">Actually Works</span></h1>
+            <p>We exist to close the gap between AI hype and AI impact. Every product we ship is built to deliver measurable business outcomes from day one.</p>
+        </div>
+    </section>
+
+    <!-- Our Story -->
+    <section class="story-section">
+        <div class="container">
+            <div class="story-grid reveal">
+                <div class="story-content">
+                    <div class="section-label" style="justify-content:flex-start;">Our Story</div>
+                    <h3>Founded on a Simple Belief</h3>
+                    <p>3GP.AI was born from a frustration shared by builders everywhere: too many AI products look great in demos but fall apart in production. We set out to change that.</p>
+                    <p>Our founding team came together from enterprise engineering, infrastructure, and applied machine learning backgrounds. We had seen firsthand how organizations struggle to move from AI experiments to real, production-grade systems that drive revenue.</p>
+                    <p>So we built 3GP.AI around a single principle: AI should deliver real business outcomes, not just impressive demos. Every product in our portfolio is designed to work at enterprise scale, integrate with existing workflows, and prove its value through measurable results.</p>
+                </div>
+                <div class="story-visual">
+                    <div class="story-card">
+                        <div class="story-card-icon">&#x1f3af;</div>
+                        <blockquote>The best AI is the AI you forget is there &mdash; it just makes everything work better.</blockquote>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Values -->
+    <section class="values-section">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-label">Our Values</div>
+                <h2 class="section-title">What Drives Us</h2>
+                <p class="section-desc">Four principles that guide every decision we make, every product we build, and every team we work with.</p>
+            </div>
+            <div class="values-grid">
+                <div class="value-card reveal">
+                    <div class="value-icon">&#x1f680;</div>
+                    <h4>Ship What Works</h4>
+                    <p>We prioritize production-ready over prototype-perfect. If it doesn't work reliably at scale, it doesn't ship.</p>
+                </div>
+                <div class="value-card reveal">
+                    <div class="value-icon">&#x1f50d;</div>
+                    <h4>Transparency First</h4>
+                    <p>No black boxes. Our AI systems are explainable, auditable, and built so you always understand what's happening and why.</p>
+                </div>
+                <div class="value-card reveal">
+                    <div class="value-icon">&#x1f3d7;&#xfe0f;</div>
+                    <h4>Enterprise-Grade Always</h4>
+                    <p>Security, compliance, and reliability aren't afterthoughts. They're built into the foundation of everything we create.</p>
+                </div>
+                <div class="value-card reveal">
+                    <div class="value-icon">&#x1f4c8;</div>
+                    <h4>Measurable Impact</h4>
+                    <p>We tie every feature to a business metric. If we can't measure the improvement, we haven't finished the job.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="stats-grid reveal">
+                <div class="stat-item">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">Enterprise Deployments</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">12M+</div>
+                    <div class="stat-label">AI Decisions / Day</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">4</div>
+                    <div class="stat-label">Products Shipped</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Global &amp; Remote-First</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team -->
+    <section class="team-section">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-label">The Team</div>
+                <h2 class="section-title">Meet the Founders</h2>
+                <p class="section-desc">A small, focused team of builders who've shipped AI at scale across industries.</p>
+            </div>
+            <div class="team-grid reveal">
+                <div class="team-card">
+                    <div class="team-avatar a1">CEO</div>
+                    <h4>Founding CEO</h4>
+                    <div class="team-role">Chief Executive Officer</div>
+                    <p>Vision, strategy, and the relentless pursuit of AI that delivers.</p>
+                </div>
+                <div class="team-card">
+                    <div class="team-avatar a2">CTO</div>
+                    <h4>Founding CTO</h4>
+                    <div class="team-role">Chief Technology Officer</div>
+                    <p>Architecture, infrastructure, and making it all work at scale.</p>
+                </div>
+                <div class="team-card">
+                    <div class="team-avatar a3">CPO</div>
+                    <h4>Founding CPO</h4>
+                    <div class="team-role">Chief Product Officer</div>
+                    <p>Product vision, user experience, and turning complexity into clarity.</p>
+                </div>
+                <div class="team-card">
+                    <div class="team-avatar a4">CAO</div>
+                    <h4>Founding CAO</h4>
+                    <div class="team-role">Chief AI Officer</div>
+                    <p>Machine learning, model development, and applied AI research.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta" style="padding:120px 0;">
+        <div class="container">
+            <div class="cta-box reveal">
+                <h2>Join Us or Work With Us</h2>
+                <p>We're always looking for exceptional builders. Whether you want to join the team or explore what our AI can do for your business, let's talk.</p>
+                <div class="hero-actions">
+                    <a href="/#contact" class="btn btn-primary">Get in Touch <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+                    <a href="/" class="btn btn-secondary">Back to 3GP.AI</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="/" class="logo"><div class="logo-mark">3GP</div><div class="logo-text"><span>3GP.AI</span></div></a>
+                    <p>Building agentic AI products that transform how enterprises operate.</p>
+                </div>
+                <div class="footer-col"><h5>Products</h5><a href="/openspy">OpenSPY</a><a href="/tetris">TETRIS</a><a href="/applymaster">ApplyMaster</a><a href="/consultancy">AI Consultancy</a></div>
+                <div class="footer-col"><h5>Company</h5><a href="/about">About</a><a href="#">Careers</a><a href="#">Blog</a></div>
+                <div class="footer-col"><h5>Resources</h5><a href="#">Documentation</a><a href="#">API Reference</a><a href="/#contact">Contact</a></div>
+            </div>
+            <div class="footer-bottom"><span>&copy; 2026 3GP.AI — All rights reserved.</span><div class="footer-bottom-links"><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div></div>
+        </div>
+    </footer>
+
+    <script src="/js/main.js"></script>
+</body>
+</html>

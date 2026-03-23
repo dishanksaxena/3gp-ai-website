@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Transformation Consultancy — Enterprise AI Strategy | 3GP.AI</title>
+    <meta name="description" content="3GP.AI's AI Transformation Consultancy delivers measurable results — 73% cost reduction, 5x faster deployment. From strategy to scale, we make AI work for your enterprise.">
+    <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        /* Consultancy Page Specific Styles */
+        :root {
+            --gold: #f0b429;
+            --gold-light: #f7d070;
+            --gold-dark: #d4981a;
+            --gold-glow: rgba(240, 180, 41, 0.15);
+            --gold-gradient: linear-gradient(135deg, #f0b429, #f7d070, #e8a317);
+        }
+
+        .product-hero { min-height: 90vh; display: flex; align-items: center; padding: 120px 0 80px; position: relative; z-index: 1; }
+        .product-hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+        .product-hero-content .section-label { justify-content: flex-start; }
+        .product-hero-content h1 { font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 900; letter-spacing: -2px; line-height: 1.05; margin-bottom: 20px; }
+        .product-hero-content h1 .gradient-text-gold { background: var(--gold-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .product-hero-content > p { font-size: 1.15rem; color: var(--text-secondary); line-height: 1.7; margin-bottom: 32px; }
+        .product-hero-visual { position: relative; }
+
+        /* Floating Stat Cards */
+        .stat-cards-container { position: relative; height: 420px; }
+        .stat-card-float { position: absolute; padding: 28px 32px; border-radius: var(--radius-lg); background: var(--bg-card); border: 1px solid var(--border); box-shadow: 0 20px 60px rgba(0,0,0,0.3); transition: var(--transition); z-index: 2; }
+        .stat-card-float:hover { border-color: var(--gold); transform: translateY(-8px) scale(1.03); box-shadow: 0 30px 80px rgba(0,0,0,0.4), 0 0 40px var(--gold-glow); }
+        .stat-card-float .stat-value { font-size: 2.8rem; font-weight: 900; letter-spacing: -2px; line-height: 1; margin-bottom: 6px; background: var(--gold-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .stat-card-float .stat-label { font-size: 0.8rem; color: var(--text-secondary); font-weight: 500; }
+        .stat-card-float .stat-bar { height: 4px; border-radius: 2px; background: var(--bg-secondary); margin-top: 12px; overflow: hidden; }
+        .stat-card-float .stat-bar-fill { height: 100%; border-radius: 2px; background: var(--gold-gradient); }
+
+        .stat-card-float.sc1 { top: 20px; left: 10%; animation: floatCard1 6s ease-in-out infinite; }
+        .stat-card-float.sc2 { top: 160px; right: 5%; animation: floatCard2 7s ease-in-out infinite; }
+        .stat-card-float.sc3 { top: 300px; left: 20%; animation: floatCard3 5s ease-in-out infinite; }
+
+        @keyframes floatCard1 { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+        @keyframes floatCard2 { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-16px); } }
+        @keyframes floatCard3 { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+
+        /* Connecting lines between stat cards */
+        .stat-lines { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+        .stat-lines svg { width: 100%; height: 100%; }
+        .stat-line { stroke-dasharray: 6 6; animation: dashMove 2s linear infinite; }
+        @keyframes dashMove { to { stroke-dashoffset: -24; } }
+
+        /* Gold accent overrides */
+        .gold-label { color: var(--gold) !important; }
+        .btn-gold { background: var(--gold-gradient); color: #000; font-weight: 700; border: none; }
+        .btn-gold:hover { box-shadow: 0 8px 32px var(--gold-glow); transform: translateY(-2px); }
+
+        /* Services Section */
+        .services-section { padding: 120px 0; }
+        .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+        .service-card { padding: 40px 32px; border-radius: var(--radius-lg); background: var(--bg-card); border: 1px solid var(--border); transition: var(--transition); position: relative; overflow: hidden; }
+        .service-card:hover { border-color: var(--border-hover); transform: translateY(-4px); box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
+        .service-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--gold-gradient); opacity: 0; transition: var(--transition); }
+        .service-card:hover::before { opacity: 1; }
+        .service-icon { width: 52px; height: 52px; border-radius: 14px; background: var(--gold-gradient); display: flex; align-items: center; justify-content: center; margin-bottom: 20px; font-size: 1.4rem; }
+        .service-card h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 10px; }
+        .service-card p { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.65; }
+        .service-card .service-tag { display: inline-block; margin-top: 16px; font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--gold); padding: 4px 12px; border-radius: 50px; background: var(--gold-glow); }
+
+        /* Process Section */
+        .process-section { padding: 120px 0; }
+        .process-timeline { position: relative; max-width: 900px; margin: 64px auto 0; }
+        .process-track { position: absolute; top: 44px; left: 0; right: 0; height: 4px; background: var(--bg-secondary); border-radius: 2px; z-index: 0; }
+        .process-track-fill { height: 100%; border-radius: 2px; background: var(--gold-gradient); width: 0; transition: width 1.5s ease-out; }
+        .process-track-fill.animated { width: 100%; }
+        .process-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; position: relative; z-index: 1; }
+        .process-step { text-align: center; }
+        .process-step-marker { width: 88px; height: 88px; border-radius: 50%; background: var(--bg-card); border: 3px solid var(--border); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 1.8rem; transition: all 0.5s ease; position: relative; }
+        .process-step-marker.active { border-color: var(--gold); box-shadow: 0 0 30px var(--gold-glow); }
+        .process-step-marker .step-num { position: absolute; top: -6px; right: -6px; width: 24px; height: 24px; border-radius: 50%; background: var(--gold-gradient); display: flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: 800; color: #000; }
+        .process-step h4 { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
+        .process-step p { font-size: 0.82rem; color: var(--text-secondary); line-height: 1.6; }
+        .process-step .process-duration { display: inline-block; margin-top: 10px; font-size: 0.65rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--gold); padding: 3px 10px; border-radius: 50px; background: var(--gold-glow); }
+
+        /* Connector arrows between steps */
+        .process-connector { display: none; }
+        @media (min-width: 1025px) {
+            .process-connector { display: block; position: absolute; top: 44px; z-index: 0; }
+            .process-connector svg { overflow: visible; }
+        }
+
+        /* Case Studies Section */
+        .cases-section { padding: 120px 0; }
+        .cases-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+        .case-card { border-radius: var(--radius-lg); background: var(--bg-card); border: 1px solid var(--border); overflow: hidden; transition: var(--transition); }
+        .case-card:hover { border-color: var(--border-hover); transform: translateY(-4px); box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
+        .case-card-header { padding: 32px 28px 20px; border-bottom: 1px solid var(--border); }
+        .case-industry { display: inline-block; font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--gold); margin-bottom: 10px; }
+        .case-card-header h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 6px; }
+        .case-card-header p { font-size: 0.82rem; color: var(--text-secondary); line-height: 1.5; }
+        .case-metrics { padding: 20px 28px 28px; }
+        .case-metric-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
+        .case-metric-row:last-child { border-bottom: none; }
+        .case-metric-name { font-size: 0.8rem; color: var(--text-secondary); }
+        .case-metric-values { display: flex; align-items: center; gap: 12px; }
+        .case-before { font-size: 0.8rem; color: var(--text-muted); text-decoration: line-through; opacity: 0.6; }
+        .case-after { font-size: 0.9rem; font-weight: 700; color: var(--accent-2); }
+        .case-arrow { font-size: 0.7rem; color: var(--gold); }
+
+        /* Engagement Models */
+        .engagement-section { padding: 120px 0; }
+        .engagement-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+        .engagement-card { padding: 40px 32px; border-radius: var(--radius-lg); background: var(--bg-card); border: 1px solid var(--border); transition: var(--transition); text-align: center; position: relative; }
+        .engagement-card:hover { border-color: var(--border-hover); }
+        .engagement-card.featured { border-color: var(--gold); background: linear-gradient(180deg, rgba(240,180,41,0.06), var(--bg-card)); }
+        .engagement-card.featured::before { content: 'Most Popular'; position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--gold-gradient); color: #000; font-size: 0.7rem; font-weight: 700; padding: 4px 16px; border-radius: 50px; }
+        .engagement-tier { font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; color: var(--gold); margin-bottom: 12px; }
+        .engagement-title { font-size: 1.5rem; font-weight: 800; letter-spacing: -1px; margin-bottom: 8px; }
+        .engagement-desc { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 24px; line-height: 1.5; }
+        .engagement-features { text-align: left; margin-bottom: 28px; }
+        .engagement-feature { display: flex; align-items: center; gap: 10px; padding: 8px 0; font-size: 0.85rem; color: var(--text-secondary); }
+        .engagement-feature::before { content: '\2713'; color: var(--gold); font-weight: 700; }
+        .engagement-btn { width: 100%; }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .product-hero-grid { grid-template-columns: 1fr; }
+            .stat-cards-container { height: 340px; }
+            .stat-card-float.sc1 { top: 0; left: 0; }
+            .stat-card-float.sc2 { top: 120px; right: 0; left: auto; }
+            .stat-card-float.sc3 { top: 240px; left: 5%; }
+            .services-grid { grid-template-columns: 1fr 1fr; }
+            .process-steps { grid-template-columns: 1fr 1fr; }
+            .process-track { display: none; }
+        }
+        @media (max-width: 768px) {
+            .services-grid, .cases-grid, .engagement-grid { grid-template-columns: 1fr; }
+            .process-steps { grid-template-columns: 1fr; }
+            .stat-cards-container { height: auto; display: flex; flex-direction: column; gap: 16px; }
+            .stat-card-float { position: relative !important; top: auto !important; left: auto !important; right: auto !important; animation: none !important; }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-grid"></div>
+    <div class="bg-orbs"><div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div></div>
+    <div class="cursor-dot" id="cursorDot"></div>
+
+    <!-- Navbar -->
+    <nav class="navbar scrolled" id="navbar">
+        <div class="navbar-inner">
+            <a href="/" class="logo"><div class="logo-mark">3GP</div><div class="logo-text"><span>3GP.AI</span></div></a>
+            <div class="nav-links" id="navLinks">
+                <a href="/#products">Products</a>
+                <a href="/#capabilities">Capabilities</a>
+                <a href="/#transformation">Services</a>
+                <a href="/#proof">Results</a>
+                <a href="/#contact" class="nav-cta">Get Started</a>
+            </div>
+            <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="product-hero">
+        <div class="container">
+            <div class="product-hero-grid">
+                <div class="product-hero-content">
+                    <div class="section-label" style="justify-content:flex-start;"><span class="gold-label">AI Transformation Consultancy</span></div>
+                    <h1>AI Transformation<br>That <span class="gradient-text-gold">Delivers</span></h1>
+                    <p>We don't just advise on AI strategy  &mdash;  we build it, deploy it, and prove the ROI. Our consultants are engineers, data scientists, and change leaders who embed with your team to deliver real transformation.</p>
+                    <div class="hero-actions" style="justify-content:flex-start;">
+                        <a href="/#contact" class="btn btn-gold">Book a Strategy Session <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px;"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+                        <a href="#services" class="btn btn-secondary">Explore Services</a>
+                    </div>
+                </div>
+                <div class="product-hero-visual">
+                    <div class="stat-cards-container">
+                        <div class="stat-lines">
+                            <svg viewBox="0 0 500 420" preserveAspectRatio="none">
+                                <line x1="160" y1="80" x2="380" y2="200" class="stat-line" stroke="rgba(240,180,41,0.25)" stroke-width="1.5"/>
+                                <line x1="380" y1="220" x2="200" y2="340" class="stat-line" stroke="rgba(240,180,41,0.2)" stroke-width="1.5" style="animation-delay:-0.8s;"/>
+                                <line x1="140" y1="90" x2="180" y2="330" class="stat-line" stroke="rgba(240,180,41,0.15)" stroke-width="1" style="animation-delay:-1.2s;"/>
+                            </svg>
+                        </div>
+                        <div class="stat-card-float sc1">
+                            <div class="stat-value">73%</div>
+                            <div class="stat-label">Average Cost Reduction</div>
+                            <div class="stat-bar"><div class="stat-bar-fill" style="width:73%;"></div></div>
+                        </div>
+                        <div class="stat-card-float sc2">
+                            <div class="stat-value">5x</div>
+                            <div class="stat-label">Faster Time-to-Deploy</div>
+                            <div class="stat-bar"><div class="stat-bar-fill" style="width:85%;"></div></div>
+                        </div>
+                        <div class="stat-card-float sc3">
+                            <div class="stat-value">$2.4M</div>
+                            <div class="stat-label">Avg. Annual Savings per Client</div>
+                            <div class="stat-bar"><div class="stat-bar-fill" style="width:92%;"></div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section class="services-section" id="services">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-label"><span class="gold-label">What We Do</span></div>
+                <h2 class="section-title">End-to-End AI Transformation Services</h2>
+                <p class="section-desc">Six core capabilities that take you from AI-curious to AI-native, with measurable results at every stage.</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card reveal">
+                    <div class="service-icon">&#x1f50d;</div>
+                    <h3>AI Readiness Audit</h3>
+                    <p>Comprehensive assessment of your data infrastructure, team capabilities, and process maturity. We identify the highest-impact AI opportunities and build your prioritized roadmap.</p>
+                    <span class="service-tag">Week 1-2</span>
+                </div>
+                <div class="service-card reveal">
+                    <div class="service-icon">&#x1f3d7;&#xfe0f;</div>
+                    <h3>Architecture Design</h3>
+                    <p>Blueprint your AI-ready infrastructure. We design data pipelines, model serving platforms, and integration patterns that scale from prototype to enterprise production.</p>
+                    <span class="service-tag">Week 2-4</span>
+                </div>
+                <div class="service-card reveal">
+                    <div class="service-icon">&#x1f9e0;</div>
+                    <h3>Model Selection &amp; Training</h3>
+                    <p>Choose the right models for your use cases. We evaluate, fine-tune, and benchmark foundation models, custom ML, and agentic AI systems for your specific domain.</p>
+                    <span class="service-tag">Week 3-8</span>
+                </div>
+                <div class="service-card reveal">
+                    <div class="service-icon">&#x1f465;</div>
+                    <h3>Change Management</h3>
+                    <p>AI transformation fails without people on board. We train your teams, redesign workflows, and build internal champions to ensure lasting adoption across the organization.</p>
+                    <span class="service-tag">Ongoing</span>
+                </div>
+                <div class="service-card reveal">
+                    <div class="service-icon">&#x1f680;</div>
+                    <h3>Deployment &amp; Integration</h3>
+                    <p>Ship AI to production with confidence. We handle CI/CD for ML, monitoring, A/B testing, and seamless integration with your existing systems and workflows.</p>
+                    <span class="service-tag">Week 6-12</span>
+                </div>
+                <div class="service-card reveal">
+                    <div class="service-icon">&#x1f4c8;</div>
+                    <h3>ROI Modeling &amp; Optimization</h3>
+                    <p>Prove the value with hard numbers. We build financial models, track KPIs, and continuously optimize AI systems to maximize return on your AI investment.</p>
+                    <span class="service-tag">Continuous</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Process -->
+    <section class="process-section">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-label"><span class="gold-label">Our Process</span></div>
+                <h2 class="section-title">From Vision to Value in Four Phases</h2>
+                <p class="section-desc">A proven methodology refined across dozens of enterprise engagements. Each phase delivers tangible milestones.</p>
+            </div>
+            <div class="process-timeline reveal" id="processTimeline">
+                <div class="process-track">
+                    <div class="process-track-fill" id="processTrackFill"></div>
+                </div>
+                <div class="process-steps">
+                    <div class="process-step">
+                        <div class="process-step-marker active" id="step1">
+                            <span class="step-num">1</span>
+                            &#x1f50e;
+                        </div>
+                        <h4>Discovery</h4>
+                        <p>Deep-dive into your business goals, data landscape, and technical debt. We map every opportunity and constraint.</p>
+                        <span class="process-duration">2 Weeks</span>
+                    </div>
+                    <div class="process-step">
+                        <div class="process-step-marker" id="step2">
+                            <span class="step-num">2</span>
+                            &#x1f4d0;
+                        </div>
+                        <h4>Architecture</h4>
+                        <p>Design the technical blueprint: data pipelines, model infrastructure, integration points, and security framework.</p>
+                        <span class="process-duration">2-3 Weeks</span>
+                    </div>
+                    <div class="process-step">
+                        <div class="process-step-marker" id="step3">
+                            <span class="step-num">3</span>
+                            &#x2692;&#xfe0f;
+                        </div>
+                        <h4>Build &amp; Deploy</h4>
+                        <p>Agile sprints to build, test, and deploy AI solutions. Rapid iteration with stakeholder feedback at every checkpoint.</p>
+                        <span class="process-duration">4-8 Weeks</span>
+                    </div>
+                    <div class="process-step">
+                        <div class="process-step-marker" id="step4">
+                            <span class="step-num">4</span>
+                            &#x1f4c8;
+                        </div>
+                        <h4>Scale &amp; Optimize</h4>
+                        <p>Measure ROI, fine-tune models, expand to new use cases, and build internal capability for self-sustained AI growth.</p>
+                        <span class="process-duration">Ongoing</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Case Studies -->
+    <section class="cases-section">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-label"><span class="gold-label">Case Studies</span></div>
+                <h2 class="section-title">Proven Results Across Industries</h2>
+                <p class="section-desc">Real transformations with measurable impact. Here's what happens when AI strategy meets execution.</p>
+            </div>
+            <div class="cases-grid reveal">
+                <div class="case-card">
+                    <div class="case-card-header">
+                        <div class="case-industry">Fintech</div>
+                        <h3>Automated Fraud Detection</h3>
+                        <p>Replaced legacy rules-based system with real-time AI fraud detection for a Series C payments company.</p>
+                    </div>
+                    <div class="case-metrics">
+                        <div class="case-metric-row">
+                            <span class="case-metric-name">False Positives</span>
+                            <div class="case-metric-values">
+                                <span class="case-before">34%</span>
+                                <span class="case-arrow">&#x2192;</span>
+                                <span class="case-after">2.1%</span>
+                            </div>
+                        </div>
+                        <div class="case-metric-row">
+                            <span class="case-metric-name">Detection Speed</span>
+                            <div class="case-metric-values">
+                                <span class="case-before">4.2s</span>
+                                <span class="case-arrow">&#x2192;</span>
+                                <span class="case-after">45ms</span>
+                            </div>
+                        </div>
+                        <div class="case-metric-row">
+                            <span class="case-metric-name">Annual Savings</span>
+                            <div class="case-metric-values">
+                                <span class="case-before">&mdash;</span>
+                                <span class="case-arrow">&#x2192;</span>
+                                <span class="case-after">$3.8M</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="case-card">
+                    <div class="case-card-header">
+                        <div class="case-industry">Healthcare</div>
+                        <h3>Clinical Document Intelligence</h3>
+                        <p>Built an AI pipeline to extract, classify, and route unstructured clinical documents for a hospital network.</p>
+                    </div>
+                    <div class="case-metrics">
+                        <div class="case-metric-row">
+                            <span class="case-metric-name">Processing Time</span>
+                            <div class="case-metric-values">
+                                <span class="case-before">12 hrs</span>
+                                <span class="case-arrow">&#x2192;</span>
+                                <span class="case-after">8 min</span>
+                            </div>
+                        </div>
+                        <div class="case-metric-row">
+                            <span class="case-metric-name">Accuracy</span>
+                            <div class="case-metric-values">
+                                <span class="case-before">76%</span>
+                                <span class="case-arrow">&#x2192;</span>
+                                <span class="case-after">97.3%</span>
+                            </div>
+                        </div>
+                        <div class="case-metric-row">
+                            <span class="case-metric-name">Staff Hours Saved</span>
+                            <div class="case-metric-values">
+                                <span class="case-before">&mdash;</span>
+                                <span class="case-arrow">&#x2192;</span>
+                                <span class="case-after">2,400/mo</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="case-card">
+                    <div class="case-card-header">
+                        <div class="case-industry">E-Commerce</div>
+                        <h3>AI-Powered Personalization Engine</h3>
+                        <p>Deployed a real-time recommendation and dynamic pricing system for a top-50 DTC brand.</p>
+                    </div>
+                    <div class="case-metrics">
+                        <div class="case-metric-row">
+                            <span class="case-metric-name">Conversion Rate</span>
+                            <div class="case-metric-values">
+                                <span class="case-before">2.1%</span>
+                                <span class="case-arrow">&#x2192;</span>
+                                <span class="case-after">5.8%</span>
+                            </div>
+                        </div>
+                        <div class="case-metric-row">
+                            <span class="case-metric-name">Avg. Order Value</span>
+                            <div class="case-metric-values">
+                                <span class="case-before">$47</span>
+                                <span class="case-arrow">&#x2192;</span>
+                                <span class="case-after">$82</span>
+                            </div>
+                        </div>
+                        <div class="case-metric-row">
+                            <span class="case-metric-name">Revenue Uplift</span>
+                            <div class="case-metric-values">
+                                <span class="case-before">&mdash;</span>
+                                <span class="case-arrow">&#x2192;</span>
+                                <span class="case-after">+41%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Engagement Models -->
+    <section class="engagement-section">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-label"><span class="gold-label">Engagement Models</span></div>
+                <h2 class="section-title">Choose How We Work Together</h2>
+                <p class="section-desc">Flexible engagement structures designed to match your pace, scale, and ambition.</p>
+            </div>
+            <div class="engagement-grid reveal">
+                <div class="engagement-card">
+                    <div class="engagement-tier">Advisory</div>
+                    <div class="engagement-title">Strategic Guidance</div>
+                    <div class="engagement-desc">Expert advisors on-call for AI strategy, vendor evaluation, and technical architecture review.</div>
+                    <div class="engagement-features">
+                        <div class="engagement-feature">Weekly strategy sessions</div>
+                        <div class="engagement-feature">AI roadmap development</div>
+                        <div class="engagement-feature">Vendor &amp; tool evaluation</div>
+                        <div class="engagement-feature">Board-ready presentations</div>
+                        <div class="engagement-feature">Slack/Teams access to advisors</div>
+                    </div>
+                    <a href="/#contact" class="btn btn-secondary engagement-btn">Learn More</a>
+                </div>
+                <div class="engagement-card featured" style="position:relative;">
+                    <div class="engagement-tier">Embedded Team</div>
+                    <div class="engagement-title">Build Together</div>
+                    <div class="engagement-desc">Our engineers and data scientists embed with your team to build and ship AI solutions.</div>
+                    <div class="engagement-features">
+                        <div class="engagement-feature">Everything in Advisory</div>
+                        <div class="engagement-feature">Dedicated engineering squad</div>
+                        <div class="engagement-feature">Agile sprint execution</div>
+                        <div class="engagement-feature">Knowledge transfer &amp; training</div>
+                        <div class="engagement-feature">Production deployment support</div>
+                        <div class="engagement-feature">Weekly stakeholder demos</div>
+                    </div>
+                    <a href="/#contact" class="btn btn-gold engagement-btn">Get Started</a>
+                </div>
+                <div class="engagement-card">
+                    <div class="engagement-tier">Full Transformation</div>
+                    <div class="engagement-title">End-to-End Delivery</div>
+                    <div class="engagement-desc">We own the entire AI transformation from strategy through deployment and ongoing optimization.</div>
+                    <div class="engagement-features">
+                        <div class="engagement-feature">Everything in Embedded Team</div>
+                        <div class="engagement-feature">Full program management</div>
+                        <div class="engagement-feature">Change management &amp; training</div>
+                        <div class="engagement-feature">ROI tracking dashboard</div>
+                        <div class="engagement-feature">12-month optimization support</div>
+                        <div class="engagement-feature">Executive sponsorship model</div>
+                    </div>
+                    <a href="/#contact" class="btn btn-secondary engagement-btn">Contact Sales</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta" style="padding:120px 0;">
+        <div class="container">
+            <div class="cta-box reveal">
+                <h2>Ready to Transform with AI?</h2>
+                <p>Book a free strategy session with our AI transformation team. No pitch decks &mdash; just real talk about what AI can do for your business.</p>
+                <div class="hero-actions">
+                    <a href="/#contact" class="btn btn-gold">Book a Strategy Session <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px;"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+                    <a href="/" class="btn btn-secondary">Back to 3GP.AI</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="/" class="logo"><div class="logo-mark">3GP</div><div class="logo-text"><span>3GP.AI</span></div></a>
+                    <p>Building agentic AI products that transform how enterprises operate.</p>
+                </div>
+                <div class="footer-col"><h5>Products</h5><a href="/openspy">OpenSPY</a><a href="/tetris">TETRIS</a><a href="/applymaster">ApplyMaster</a><a href="/consultancy">AI Consultancy</a></div>
+                <div class="footer-col"><h5>Company</h5><a href="/about">About</a><a href="#">Careers</a><a href="#">Blog</a></div>
+                <div class="footer-col"><h5>Resources</h5><a href="#">Documentation</a><a href="#">API Reference</a><a href="/#contact">Contact</a></div>
+            </div>
+            <div class="footer-bottom"><span>&copy; 2026 3GP.AI — All rights reserved.</span><div class="footer-bottom-links"><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div></div>
+        </div>
+    </footer>
+
+    <script src="/js/main.js"></script>
+    <script>
+        // Animate process timeline on scroll
+        const processObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const fill = document.getElementById('processTrackFill');
+                    if (fill) fill.classList.add('animated');
+
+                    const markers = document.querySelectorAll('.process-step-marker');
+                    markers.forEach((marker, i) => {
+                        setTimeout(() => {
+                            marker.classList.add('active');
+                        }, 400 * (i + 1));
+                    });
+
+                    processObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.3 });
+
+        const timeline = document.getElementById('processTimeline');
+        if (timeline) processObserver.observe(timeline);
+    </script>
+</body>
+</html>
