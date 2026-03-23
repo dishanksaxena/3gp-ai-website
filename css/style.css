@@ -334,7 +334,7 @@ section { position: relative; z-index: 1; }
 .mock-metric .down { color: var(--accent-3); }
 
 /* Tetris Mockup */
-.tetris-mock .mock-pipeline { display: flex; gap: 12px; margin-bottom: 12px; }
+.ats360-mock .mock-pipeline { display: flex; gap: 12px; margin-bottom: 12px; }
 .mock-stage {
     flex: 1; padding: 10px; border-radius: 8px; border: 1px solid var(--border);
     background: var(--bg-glass);
@@ -666,7 +666,7 @@ body:hover .cursor-dot { opacity: 0.6; }
     .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
     .product-info { padding: 32px; }
     .product-visual { padding: 24px 32px 32px; }
-    .tetris-mock .mock-pipeline { flex-direction: column; }
+    .ats360-mock .mock-pipeline { flex-direction: column; }
     .form-row { grid-template-columns: 1fr; }
 }
 
